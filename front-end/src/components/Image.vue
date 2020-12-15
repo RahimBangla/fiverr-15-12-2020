@@ -36,7 +36,7 @@
           </div>
         </div>
         <br />
-        <div class="description">
+        <div class="description2">
           {{ com.comment }}
         </div>
       </div>
@@ -129,6 +129,13 @@ export default {
   margin-bottom: 15px;
   border: 1px solid black;
   border-radius: 10px;
+}
+.description2 {
+  background-color: #ffffff;
+  padding: 10px 15px 20px 15px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .userName {
