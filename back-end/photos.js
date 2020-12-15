@@ -8,7 +8,7 @@ const validUser = users.valid;
 // Configure multer so that it will upload to '/public/images'
 const multer = require('multer')
 const upload = multer({
-  dest: '/var/www/photobomb.yourdomain.com/images/',
+  dest: '/var/www/lab5.christianjuniuscs260.me/images/',
   limits: {
     fileSize: 10000000
   }
