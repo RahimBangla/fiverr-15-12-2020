@@ -99,7 +99,7 @@ router.get("/all", async (req, res) => {
     return res.sendStatus(500);
   }
 });
-// get all photos
+// get single photos
 router.get("/:id", async (req, res) => {
   try {
       let photo = await Photo.findOne({
@@ -118,7 +118,7 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// Comment photo
+// Comment submit
 router.post("/comment", validUser, async (req, res) => {
   // check parameters
   const comment = new Comment({
