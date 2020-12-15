@@ -2,18 +2,18 @@
   <div class="home">
     <br /><br />
     <br />
-    <Images :photo="photo" />
+    <imagesview :photo="photo" :reload="getPhotos" />
     <p v-if="error">{{ error }}</p>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Images from "@/components/Image.vue";
+import imagesview from "@/components/Image.vue";
 export default {
   name: "Home",
   components: {
-    Images,
+    imagesview,
   },
   data() {
     return {

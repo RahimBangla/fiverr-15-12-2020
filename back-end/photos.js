@@ -30,6 +30,24 @@ const photoSchema = new mongoose.Schema({
 
 const Photo = mongoose.model('Photo', photoSchema);
 
+const commentSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
+  photo: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Photo'
+  },
+  comment: String,
+  created: {
+    type: Date,
+    default: Date.now
+  },
+});
+
+const Comment = mongoose.model('Comment', commentSchema);
+
 // upload photo
 router.post("/", validUser, upload.single('photo'), async (req, res) => {
   // check parameters
@@ -87,7 +105,30 @@ router.get("/:id", async (req, res) => {
       let photo = await Photo.findOne({
           _id: req.params.id
       }).populate('user');
-    return res.send(photo);
+    
+      let comments = await Comment.find({
+            photo: photo
+      }).populate('user');
+    
+    return res.send({data: photo, comments: comments});
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+});
+
+
+// Comment photo
+router.post("/comment", validUser, async (req, res) => {
+  // check parameters
+  const comment = new Comment({
+    user: req.user,
+    photo: req.body.photo,
+    comment: req.body.comment,
+  });
+  try {
+    await comment.save();
+    return res.sendStatus(200);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
